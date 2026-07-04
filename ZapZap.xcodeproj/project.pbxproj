@@ -1,0 +1,688 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		088BCCB5BBFFC785AC60F454 /* libwebp in Frameworks */ = {isa = PBXBuildFile; productRef = F6136C41BDA4A7AE74594671 /* libwebp */; };
+		0A5BFEE9618C489C5A54F06E /* MemeTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B13B7E521B15B5E456566 /* MemeTextEditorView.swift */; };
+		0B4283D2C2BDE21FF6DE4321 /* MemeEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ED847B92BD005433D8C056 /* MemeEditorViewModel.swift */; };
+		0E73EDCA3DEECA37CF5ECC40 /* BackgroundRemovalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBF973352515DD9F620989 /* BackgroundRemovalService.swift */; };
+		10BE3BD56708F8ABEC33C803 /* CameraPermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4FBFD778F909EE7D932B38 /* CameraPermissionService.swift */; };
+		150848E8BE94DFC5791ADDBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A31798704B34A2E90C3357 /* AppDelegate.swift */; };
+		175BDACBFA58579C725710F8 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E0BD0F64589E918C38CF /* ExportView.swift */; };
+		192E2BEDBE07B74AAFBBFD09 /* CropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5089EA7BACF96B3CFC858E66 /* CropOverlay.swift */; };
+		1CF770576394671845EA608A /* PackCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1972DDEBD63B59DC59684 /* PackCardView.swift */; };
+		256CD51455797B302AF0F466 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABBEFE62FF3CC6FA55C4131 /* EditorView.swift */; };
+		33A9A4B8BDF51D3091B4F62C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E598697029DF7F76FDACD01 /* HomeView.swift */; };
+		3922C6994D0F0C1E62802EF4 /* PackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2600D6039BF0F78895A35BEA /* PackDetailView.swift */; };
+		41207835EB8947237C4EE8A8 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303EF830C046FE3BFAFB8C6B /* EmojiPicker.swift */; };
+		46B9DD9992FDF541618969C4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405704CAB206095E27766020 /* HomeViewModel.swift */; };
+		52B5FA175B74B663158BAF4B /* BackgroundEraserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB63F5A6DA0ED8401BA52AF /* BackgroundEraserView.swift */; };
+		54C1FDDDEDCC9D5112A8341F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7B14E3D412BD503F8728C4C /* Localizable.strings */; };
+		5AF1E53EFE4F546B06C0193C /* PasteboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D31429708476982243DCE77 /* PasteboardService.swift */; };
+		5E184A58A44CA68A2D0EF5F0 /* WebPConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07AF9349438288C9068422F /* WebPConverter.swift */; };
+		6A6A9476A1262F06545F3EEF /* StickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A923D461FAFCE9F1B68AD /* StickerTests.swift */; };
+		70FF425E92C80956C5D18198 /* StickerPackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E139CE28D800DD9854EEAF08 /* StickerPackTests.swift */; };
+		754970EC81C8E7EA14E3C1BA /* ExportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D957F8A8E285DB56FDE3F23D /* ExportData.swift */; };
+		76F1BE40D1625C1272D4ACF3 /* SourcePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCB7599BF574DEB370C4B4 /* SourcePicker.swift */; };
+		85F8FD11864E70066C99934C /* WhatsAppExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779FF9923FA14731C24CC51 /* WhatsAppExporter.swift */; };
+		87952F67049CED542898A62E /* ExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C605EE2FA61195E99D3D7CFF /* ExportViewModel.swift */; };
+		BCEB0334E476497046486A4E /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC7C53B6686A8A10108FF /* ImageDownloadService.swift */; };
+		D1DBF1877B9B2CED04EF56F9 /* ZapZapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922321E342A579C2224BEBE6 /* ZapZapApp.swift */; };
+		D6BEDCADE1B893C5FA021040 /* EditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9019BBF80F46EB61EDF6A418 /* EditorViewModel.swift */; };
+		E2731A948A525837A18B3FAF /* TrimSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC340B6CF7005AAEE5C2DD /* TrimSlider.swift */; };
+		E3D759A2982230D383CF0604 /* StickerPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55492224B00DBAAD5C20CC2 /* StickerPack.swift */; };
+		F71AC6EFCC80BD9CECB936F0 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D34DB56C7F0AB9EC923ECA4 /* StorageService.swift */; };
+		FB3F1F20626C57CAFD109AB9 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E40F467F278695865FE0B6C /* Sticker.swift */; };
+		FD9E196FE0433A76186100D9 /* MemeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15244EC22024766CAB2C8689 /* MemeText.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		58C0745B5B562CF49B448D8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9731066D8AB16EC7E91416E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02420D0B42AEA966EE327C0E;
+			remoteInfo = ZapZap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BFBF973352515DD9F620989 /* BackgroundRemovalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRemovalService.swift; sourceTree = "<group>"; };
+		0D34DB56C7F0AB9EC923ECA4 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		15244EC22024766CAB2C8689 /* MemeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeText.swift; sourceTree = "<group>"; };
+		1779FF9923FA14731C24CC51 /* WhatsAppExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsAppExporter.swift; sourceTree = "<group>"; };
+		1E40F467F278695865FE0B6C /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
+		2600D6039BF0F78895A35BEA /* PackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackDetailView.swift; sourceTree = "<group>"; };
+		2AEC340B6CF7005AAEE5C2DD /* TrimSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSlider.swift; sourceTree = "<group>"; };
+		303EF830C046FE3BFAFB8C6B /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
+		33ED847B92BD005433D8C056 /* MemeEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewModel.swift; sourceTree = "<group>"; };
+		405704CAB206095E27766020 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4C1B13B7E521B15B5E456566 /* MemeTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextEditorView.swift; sourceTree = "<group>"; };
+		4E598697029DF7F76FDACD01 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		5089EA7BACF96B3CFC858E66 /* CropOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropOverlay.swift; sourceTree = "<group>"; };
+		583FC7C53B6686A8A10108FF /* ImageDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
+		5D31429708476982243DCE77 /* PasteboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardService.swift; sourceTree = "<group>"; };
+		5FB63F5A6DA0ED8401BA52AF /* BackgroundEraserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEraserView.swift; sourceTree = "<group>"; };
+		643A923D461FAFCE9F1B68AD /* StickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerTests.swift; sourceTree = "<group>"; };
+		7ABBEFE62FF3CC6FA55C4131 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		8F4FBFD778F909EE7D932B38 /* CameraPermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionService.swift; sourceTree = "<group>"; };
+		9019BBF80F46EB61EDF6A418 /* EditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewModel.swift; sourceTree = "<group>"; };
+		922321E342A579C2224BEBE6 /* ZapZapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZapZapApp.swift; sourceTree = "<group>"; };
+		96FCB7599BF574DEB370C4B4 /* SourcePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePicker.swift; sourceTree = "<group>"; };
+		A55492224B00DBAAD5C20CC2 /* StickerPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPack.swift; sourceTree = "<group>"; };
+		A9A31798704B34A2E90C3357 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B7B14E3D412BD503F8728C4C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC37C6D013C27AB57B664C6F /* ZapZap.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ZapZap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C07AF9349438288C9068422F /* WebPConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPConverter.swift; sourceTree = "<group>"; };
+		C605EE2FA61195E99D3D7CFF /* ExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewModel.swift; sourceTree = "<group>"; };
+		C6F7E0BD0F64589E918C38CF /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		CDE1972DDEBD63B59DC59684 /* PackCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackCardView.swift; sourceTree = "<group>"; };
+		D692E2B7DEFEC6D63DFAE8FC /* ZapZapTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ZapZapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D957F8A8E285DB56FDE3F23D /* ExportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportData.swift; sourceTree = "<group>"; };
+		DE62CDAC131D872E60E5CCF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E139CE28D800DD9854EEAF08 /* StickerPackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackTests.swift; sourceTree = "<group>"; };
+		EFEE965BB62F9AFDA6D7BE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E27C937DB9605275B361E871 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				088BCCB5BBFFC785AC60F454 /* libwebp in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00B0E8F483002BBD2C4347EA = {
+			isa = PBXGroup;
+			children = (
+				71FFC3D40FE4C3762ED28C7B /* ZapZap */,
+				DEAE6549E34A3974650C1A7D /* ZapZapTests */,
+				2C1537A673DC1E189925FE78 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1040C00844E40657151CF697 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D957F8A8E285DB56FDE3F23D /* ExportData.swift */,
+				15244EC22024766CAB2C8689 /* MemeText.swift */,
+				1E40F467F278695865FE0B6C /* Sticker.swift */,
+				A55492224B00DBAAD5C20CC2 /* StickerPack.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2C1537A673DC1E189925FE78 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC37C6D013C27AB57B664C6F /* ZapZap.app */,
+				D692E2B7DEFEC6D63DFAE8FC /* ZapZapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31454892EF660C17F00BE7DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EFEE965BB62F9AFDA6D7BE61 /* Info.plist */,
+				B7B14E3D412BD503F8728C4C /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3A073756EA00CA1E23E20F3C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E139CE28D800DD9854EEAF08 /* StickerPackTests.swift */,
+				643A923D461FAFCE9F1B68AD /* StickerTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F86F038FE7856BEDF9A0023 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				303EF830C046FE3BFAFB8C6B /* EmojiPicker.swift */,
+				96FCB7599BF574DEB370C4B4 /* SourcePicker.swift */,
+				2AEC340B6CF7005AAEE5C2DD /* TrimSlider.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6D6F4A41F32AE67FC5968F5D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9019BBF80F46EB61EDF6A418 /* EditorViewModel.swift */,
+				C605EE2FA61195E99D3D7CFF /* ExportViewModel.swift */,
+				405704CAB206095E27766020 /* HomeViewModel.swift */,
+				33ED847B92BD005433D8C056 /* MemeEditorViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7135CB326D6D9B9F0FECFDC7 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				C6F7E0BD0F64589E918C38CF /* ExportView.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		71FFC3D40FE4C3762ED28C7B /* ZapZap */ = {
+			isa = PBXGroup;
+			children = (
+				E743C45379B98F10C41D37C7 /* App */,
+				1040C00844E40657151CF697 /* Models */,
+				31454892EF660C17F00BE7DE /* Resources */,
+				B81D3E529AB9E94E478388C8 /* Services */,
+				6D6F4A41F32AE67FC5968F5D /* ViewModels */,
+				CF38E9328AFCF402C511EBC7 /* Views */,
+			);
+			path = ZapZap;
+			sourceTree = "<group>";
+		};
+		814E45022FA04E11DD7F858D /* MemeEditor */ = {
+			isa = PBXGroup;
+			children = (
+				4C1B13B7E521B15B5E456566 /* MemeTextEditorView.swift */,
+			);
+			path = MemeEditor;
+			sourceTree = "<group>";
+		};
+		91862DA671DFAC234C14EA1A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4E598697029DF7F76FDACD01 /* HomeView.swift */,
+				CDE1972DDEBD63B59DC59684 /* PackCardView.swift */,
+				2600D6039BF0F78895A35BEA /* PackDetailView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A9D8D721066319EA7C5AAA6A /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				5FB63F5A6DA0ED8401BA52AF /* BackgroundEraserView.swift */,
+				5089EA7BACF96B3CFC858E66 /* CropOverlay.swift */,
+				7ABBEFE62FF3CC6FA55C4131 /* EditorView.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		B81D3E529AB9E94E478388C8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0BFBF973352515DD9F620989 /* BackgroundRemovalService.swift */,
+				8F4FBFD778F909EE7D932B38 /* CameraPermissionService.swift */,
+				583FC7C53B6686A8A10108FF /* ImageDownloadService.swift */,
+				5D31429708476982243DCE77 /* PasteboardService.swift */,
+				0D34DB56C7F0AB9EC923ECA4 /* StorageService.swift */,
+				C07AF9349438288C9068422F /* WebPConverter.swift */,
+				1779FF9923FA14731C24CC51 /* WhatsAppExporter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CF38E9328AFCF402C511EBC7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F86F038FE7856BEDF9A0023 /* Components */,
+				A9D8D721066319EA7C5AAA6A /* Editor */,
+				7135CB326D6D9B9F0FECFDC7 /* Export */,
+				91862DA671DFAC234C14EA1A /* Home */,
+				814E45022FA04E11DD7F858D /* MemeEditor */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DEAE6549E34A3974650C1A7D /* ZapZapTests */ = {
+			isa = PBXGroup;
+			children = (
+				DE62CDAC131D872E60E5CCF5 /* Info.plist */,
+				3A073756EA00CA1E23E20F3C /* Models */,
+			);
+			path = ZapZapTests;
+			sourceTree = "<group>";
+		};
+		E743C45379B98F10C41D37C7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A9A31798704B34A2E90C3357 /* AppDelegate.swift */,
+				922321E342A579C2224BEBE6 /* ZapZapApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02420D0B42AEA966EE327C0E /* ZapZap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE067C87C148500FB7C83EA3 /* Build configuration list for PBXNativeTarget "ZapZap" */;
+			buildPhases = (
+				75CEF68EDF28243D58CCC637 /* SwiftLint */,
+				2EBCDB820D79748C88807FB9 /* Sources */,
+				94927650174B484439B7EF48 /* Resources */,
+				E27C937DB9605275B361E871 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZapZap;
+			packageProductDependencies = (
+				F6136C41BDA4A7AE74594671 /* libwebp */,
+			);
+			productName = ZapZap;
+			productReference = BC37C6D013C27AB57B664C6F /* ZapZap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9538701CB48F226D781FFC26 /* ZapZapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CBC61AA19F64FAA1F100240 /* Build configuration list for PBXNativeTarget "ZapZapTests" */;
+			buildPhases = (
+				0B4857E49A2A42A4DA3B81FE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F4DD683587A32BA71DFE59EE /* PBXTargetDependency */,
+			);
+			name = ZapZapTests;
+			packageProductDependencies = (
+			);
+			productName = ZapZapTests;
+			productReference = D692E2B7DEFEC6D63DFAE8FC /* ZapZapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9731066D8AB16EC7E91416E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					02420D0B42AEA966EE327C0E = {
+						DevelopmentTeam = "";
+					};
+					9538701CB48F226D781FFC26 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = B2FBD91F3AD3002E349E3E46 /* Build configuration list for PBXProject "ZapZap" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"pt-BR",
+			);
+			mainGroup = 00B0E8F483002BBD2C4347EA;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D27B025A32A0B6A08011CB65 /* XCRemoteSwiftPackageReference "libwebp-Xcode" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2C1537A673DC1E189925FE78 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02420D0B42AEA966EE327C0E /* ZapZap */,
+				9538701CB48F226D781FFC26 /* ZapZapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		94927650174B484439B7EF48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54C1FDDDEDCC9D5112A8341F /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75CEF68EDF28243D58CCC637 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B4857E49A2A42A4DA3B81FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70FF425E92C80956C5D18198 /* StickerPackTests.swift in Sources */,
+				6A6A9476A1262F06545F3EEF /* StickerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EBCDB820D79748C88807FB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				150848E8BE94DFC5791ADDBE /* AppDelegate.swift in Sources */,
+				52B5FA175B74B663158BAF4B /* BackgroundEraserView.swift in Sources */,
+				0E73EDCA3DEECA37CF5ECC40 /* BackgroundRemovalService.swift in Sources */,
+				10BE3BD56708F8ABEC33C803 /* CameraPermissionService.swift in Sources */,
+				192E2BEDBE07B74AAFBBFD09 /* CropOverlay.swift in Sources */,
+				256CD51455797B302AF0F466 /* EditorView.swift in Sources */,
+				D6BEDCADE1B893C5FA021040 /* EditorViewModel.swift in Sources */,
+				41207835EB8947237C4EE8A8 /* EmojiPicker.swift in Sources */,
+				754970EC81C8E7EA14E3C1BA /* ExportData.swift in Sources */,
+				175BDACBFA58579C725710F8 /* ExportView.swift in Sources */,
+				87952F67049CED542898A62E /* ExportViewModel.swift in Sources */,
+				33A9A4B8BDF51D3091B4F62C /* HomeView.swift in Sources */,
+				46B9DD9992FDF541618969C4 /* HomeViewModel.swift in Sources */,
+				BCEB0334E476497046486A4E /* ImageDownloadService.swift in Sources */,
+				0B4283D2C2BDE21FF6DE4321 /* MemeEditorViewModel.swift in Sources */,
+				FD9E196FE0433A76186100D9 /* MemeText.swift in Sources */,
+				0A5BFEE9618C489C5A54F06E /* MemeTextEditorView.swift in Sources */,
+				1CF770576394671845EA608A /* PackCardView.swift in Sources */,
+				3922C6994D0F0C1E62802EF4 /* PackDetailView.swift in Sources */,
+				5AF1E53EFE4F546B06C0193C /* PasteboardService.swift in Sources */,
+				76F1BE40D1625C1272D4ACF3 /* SourcePicker.swift in Sources */,
+				FB3F1F20626C57CAFD109AB9 /* Sticker.swift in Sources */,
+				E3D759A2982230D383CF0604 /* StickerPack.swift in Sources */,
+				F71AC6EFCC80BD9CECB936F0 /* StorageService.swift in Sources */,
+				E2731A948A525837A18B3FAF /* TrimSlider.swift in Sources */,
+				5E184A58A44CA68A2D0EF5F0 /* WebPConverter.swift in Sources */,
+				85F8FD11864E70066C99934C /* WhatsAppExporter.swift in Sources */,
+				D1DBF1877B9B2CED04EF56F9 /* ZapZapApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F4DD683587A32BA71DFE59EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02420D0B42AEA966EE327C0E /* ZapZap */;
+			targetProxy = 58C0745B5B562CF49B448D8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		38A2E45B9E2F11FDC46F63F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ZapZap/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LSApplicationQueriesSchemes = (
+					whatsapp,
+				);
+				NSCameraUsageDescription = "O ZapZap usa a câmera para você fotografar e criar figurinhas.";
+				NSPhotoLibraryUsageDescription = "O ZapZap acessa suas fotos para criar figurinhas personalizadas.";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.app;
+				PRODUCT_NAME = ZapZap;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6BC35E98B0CE3642B1823A71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZapZapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.ZapZapTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZapZap.app/ZapZap";
+			};
+			name = Debug;
+		};
+		B9147648BF998B1203F00BB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		CB0E0B242D9FE2F5BF959971 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		D6BFDC5F8E4005FAF703B321 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ZapZap/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LSApplicationQueriesSchemes = (
+					whatsapp,
+				);
+				NSCameraUsageDescription = "O ZapZap usa a câmera para você fotografar e criar figurinhas.";
+				NSPhotoLibraryUsageDescription = "O ZapZap acessa suas fotos para criar figurinhas personalizadas.";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.app;
+				PRODUCT_NAME = ZapZap;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		DD00A9C2A73E6A266D086695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZapZapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.ZapZapTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZapZap.app/ZapZap";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9CBC61AA19F64FAA1F100240 /* Build configuration list for PBXNativeTarget "ZapZapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BC35E98B0CE3642B1823A71 /* Debug */,
+				DD00A9C2A73E6A266D086695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B2FBD91F3AD3002E349E3E46 /* Build configuration list for PBXProject "ZapZap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB0E0B242D9FE2F5BF959971 /* Debug */,
+				B9147648BF998B1203F00BB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BE067C87C148500FB7C83EA3 /* Build configuration list for PBXNativeTarget "ZapZap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38A2E45B9E2F11FDC46F63F3 /* Debug */,
+				D6BFDC5F8E4005FAF703B321 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D27B025A32A0B6A08011CB65 /* XCRemoteSwiftPackageReference "libwebp-Xcode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/libwebp-Xcode";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F6136C41BDA4A7AE74594671 /* libwebp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D27B025A32A0B6A08011CB65 /* XCRemoteSwiftPackageReference "libwebp-Xcode" */;
+			productName = libwebp;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A9731066D8AB16EC7E91416E /* Project object */;
+}

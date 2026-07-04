@@ -24,32 +24,33 @@ enum WhatsAppExportError: LocalizedError {
     }
 }
 
-protocol WhatsAppExporterProtocol: AnyObject {
-    func export(pack: StickerPack) async throws -> URL
-    func hasWhatsAppInstalled() -> Bool
+protocol WhatsAppExporterProtocol: AnyObject, Sendable {
+    func export(packData: PackExportData) async throws -> URL
+    @MainActor func hasWhatsAppInstalled() -> Bool
 }
 
-final class WhatsAppExporter: WhatsAppExporterProtocol {
+final class WhatsAppExporter: @unchecked Sendable, WhatsAppExporterProtocol {
 
     private let fileManager: FileManager
-    private let webpConverter: WebPConverterProtocol
+    private let webpConverter: any WebPConverterProtocol
 
     init(
         fileManager: FileManager = .default,
-        webpConverter: WebPConverterProtocol = WebPConverter()
+        webpConverter: any WebPConverterProtocol = WebPConverter()
     ) {
         self.fileManager = fileManager
         self.webpConverter = webpConverter
     }
 
+    @MainActor
     func hasWhatsAppInstalled() -> Bool {
         guard let url = URL(string: "whatsapp://") else { return false }
         return UIApplication.shared.canOpenURL(url)
     }
 
-    func export(pack: StickerPack) async throws -> URL {
-        guard pack.isValidForExport else {
-            throw WhatsAppExportError.insufficientStickers(count: pack.stickers.count)
+    func export(packData: PackExportData) async throws -> URL {
+        guard packData.isValidForExport else {
+            throw WhatsAppExportError.insufficientStickers(count: packData.stickers.count)
         }
 
         let tempDir = fileManager.temporaryDirectory
@@ -59,10 +60,10 @@ final class WhatsAppExporter: WhatsAppExporterProtocol {
         defer { try? fileManager.removeItem(at: tempDir) }
 
         let trayURL = tempDir.appendingPathComponent("tray.png")
-        try await generateTrayIcon(from: pack, to: trayURL)
+        try await generateTrayIcon(from: packData, to: trayURL)
 
         var imageFiles: [String] = []
-        for (index, sticker) in pack.stickers.enumerated() {
+        for (index, sticker) in packData.stickers.enumerated() {
             let fileName = String(format: "%02d.webp", index)
             let fileURL = tempDir.appendingPathComponent(fileName)
 
@@ -100,8 +101,8 @@ final class WhatsAppExporter: WhatsAppExporterProtocol {
 
         let manifestURL = tempDir.appendingPathComponent("sticker_packs.json")
         let manifest: [String: Any] = [
-            "identifier": pack.identifier,
-            "name": pack.name,
+            "identifier": packData.identifier,
+            "name": packData.name,
             "publisher": "ZapZap",
             "tray_image_file": "tray.png",
             "image_files": imageFiles
@@ -113,7 +114,7 @@ final class WhatsAppExporter: WhatsAppExporterProtocol {
         try jsonData.write(to: manifestURL)
 
         let exportURL = tempDir.deletingLastPathComponent()
-            .appendingPathComponent("\(pack.name).wastickers")
+            .appendingPathComponent("\(packData.name).wastickers")
 
         let zipSuccess = createZip(
             sourceDir: tempDir,
@@ -128,14 +129,14 @@ final class WhatsAppExporter: WhatsAppExporterProtocol {
         return exportURL
     }
 
-    private func generateTrayIcon(from pack: StickerPack, to url: URL) async throws {
+    private func generateTrayIcon(from packData: PackExportData, to url: URL) async throws {
         let size = CGSize(width: 96, height: 96)
 
         let trayImage: UIImage
 
-        if let trayData = pack.trayImageData, let img = UIImage(data: trayData) {
+        if let trayData = packData.trayImageData, let img = UIImage(data: trayData) {
             trayImage = img
-        } else if let firstSticker = pack.stickers.first,
+        } else if let firstSticker = packData.stickers.first,
                   let img = UIImage(data: firstSticker.imageData) {
             trayImage = img
         } else {
@@ -155,24 +156,116 @@ final class WhatsAppExporter: WhatsAppExporterProtocol {
     }
 
     private func createZip(sourceDir: URL, destination: URL, files: [String]) -> Bool {
-        let coordinator = NSFileCoordinator()
-        var success = false
+        var archiveData = Data()
+        var centralDirectory = Data()
+        var entryCount: UInt16 = 0
 
-        coordinator.coordinate(writingItemAt: destination, options: .forReplacing, error: nil) { writeURL in
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: "/usr/bin/zip")
-            process.arguments = ["-j", writeURL.path] + files
-            process.currentDirectoryURL = sourceDir
+        for fileName in files {
+            let fileURL = sourceDir.appendingPathComponent(fileName)
+            guard let fileData = try? Data(contentsOf: fileURL) else { continue }
 
-            do {
-                try process.run()
-                process.waitUntilExit()
-                success = process.terminationStatus == 0
-            } catch {
-                success = false
-            }
+            entryCount += 1
+            let localHeaderOffset = UInt32(archiveData.count)
+
+            // Local file header
+            var localHeader = Data()
+            localHeader.append(contentsOf: [0x50, 0x4B, 0x03, 0x04]) // signature
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(20).littleEndian) { Data($0) }) // version needed
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // flags
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // compression: stored
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // mod time
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // mod date
+            let crc32 = fileData.crc32()
+            localHeader.append(contentsOf: withUnsafeBytes(of: crc32.littleEndian) { Data($0) })
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt32(fileData.count).littleEndian) { Data($0) }) // compressed size
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt32(fileData.count).littleEndian) { Data($0) }) // uncompressed size
+            let nameData = fileName.data(using: .utf8)!
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(nameData.count).littleEndian) { Data($0) }) // name length
+            localHeader.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // extra field length
+            localHeader.append(nameData)
+
+            archiveData.append(localHeader)
+            archiveData.append(fileData)
+
+            // Central directory entry
+            var cdEntry = Data()
+            cdEntry.append(contentsOf: [0x50, 0x4B, 0x01, 0x02]) // signature
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(20).littleEndian) { Data($0) }) // version made by
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(20).littleEndian) { Data($0) }) // version needed
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // flags
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // compression
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // mod time
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // mod date
+            cdEntry.append(contentsOf: withUnsafeBytes(of: crc32.littleEndian) { Data($0) })
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt32(fileData.count).littleEndian) { Data($0) })
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt32(fileData.count).littleEndian) { Data($0) })
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(nameData.count).littleEndian) { Data($0) })
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // extra field
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // comment
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // disk start
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // internal attrs
+            cdEntry.append(contentsOf: withUnsafeBytes(of: UInt32(0).littleEndian) { Data($0) }) // external attrs
+            cdEntry.append(contentsOf: withUnsafeBytes(of: localHeaderOffset.littleEndian) { Data($0) })
+            cdEntry.append(nameData)
+
+            centralDirectory.append(cdEntry)
         }
 
-        return success
+        let cdOffset = UInt32(archiveData.count)
+        archiveData.append(centralDirectory)
+
+        // End of central directory record
+        var eocd = Data()
+        eocd.append(contentsOf: [0x50, 0x4B, 0x05, 0x06]) // signature
+        eocd.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // disk number
+        eocd.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // cd disk
+        eocd.append(contentsOf: withUnsafeBytes(of: entryCount.littleEndian) { Data($0) }) // entries this disk
+        eocd.append(contentsOf: withUnsafeBytes(of: entryCount.littleEndian) { Data($0) }) // total entries
+        eocd.append(contentsOf: withUnsafeBytes(of: UInt32(centralDirectory.count).littleEndian) { Data($0) })
+        eocd.append(contentsOf: withUnsafeBytes(of: cdOffset.littleEndian) { Data($0) })
+        eocd.append(contentsOf: withUnsafeBytes(of: UInt16(0).littleEndian) { Data($0) }) // comment length
+
+        archiveData.append(eocd)
+
+        do {
+            try archiveData.write(to: destination)
+            return true
+        } catch {
+            return false
+        }
+    }
+}
+
+// MARK: - CRC32
+
+extension Data {
+    func crc32() -> UInt32 {
+        return self.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> UInt32 in
+            var crc: UInt32 = 0xFFFF_FFFF
+            let table = CRC32.table
+            for byte in bytes.bindMemory(to: UInt8.self) {
+                let index = Int((crc ^ UInt32(byte)) & 0xFF)
+                crc = (crc >> 8) ^ table[index]
+            }
+            return crc ^ 0xFFFF_FFFF
+        }
+    }
+
+    private enum CRC32 {
+        static let table: [UInt32] = {
+            var table = [UInt32](repeating: 0, count: 256)
+            for i in 0..<256 {
+                var crc = UInt32(i)
+                for _ in 0..<8 {
+                    if (crc & 1) != 0 {
+                        crc = (crc >> 1) ^ 0xEDB8_8320
+                    } else {
+                        crc >>= 1
+                    }
+                }
+                table[i] = crc
+            }
+            return table
+        }()
     }
 }

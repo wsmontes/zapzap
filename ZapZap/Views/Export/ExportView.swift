@@ -60,8 +60,8 @@ struct ExportView: View {
                             Text("Arquivo criado!")
                                 .font(.headline)
 
-                            if let shareItem = viewModel.shareItem {
-                                ShareLink(item: shareItem) {
+                            if case .ready(let exportURL) = viewModel.state {
+                                ShareLink(item: exportURL) {
                                     Label("Compartilhar", systemImage: "square.and.arrow.up")
                                         .font(.headline)
                                         .frame(maxWidth: .infinity)

@@ -2,76 +2,44 @@ import UIKit
 import Foundation
 import libwebp
 
-protocol WebPConverterProtocol: AnyObject {
+protocol WebPConverterProtocol: AnyObject, Sendable {
     func encodeStatic(image: UIImage, quality: Float) throws -> Data
     func encodeAnimated(frames: [UIImage], delaysMs: [Int], quality: Float) throws -> Data
 }
 
-final class WebPConverter: WebPConverterProtocol {
+final class WebPConverter: @unchecked Sendable, WebPConverterProtocol {
 
     func encodeStatic(image: UIImage, quality: Float) throws -> Data {
         guard let cgImage = image.cgImage else {
             throw WebPConverterError.invalidImage
         }
 
-        let width = Int(cgImage.width)
-        let height = Int(cgImage.height)
+        let width = cgImage.width
+        let height = cgImage.height
 
         guard let rgbaData = cgImage.rgbaPixelData() else {
             throw WebPConverterError.pixelExtractionFailed
         }
 
-        var config = WebPConfig()
-        guard WebPConfigInit(&config) != 0 else {
-            throw WebPConverterError.configInitFailed
-        }
-
-        config.quality = quality
-        config.lossless = 0
-        config.method = 6
-        config.alpha_quality = Int(quality)
-        config.alpha_filtering = 1
-        config.alpha_compression = 1
-        config.image_hint = WEBP_HINT_PICTURE
-
-        guard WebPValidateConfig(&config) != 0 else {
-            throw WebPConverterError.invalidConfig
-        }
-
-        var picture = WebPPicture()
-        guard WebPPictureInit(&picture) != 0 else {
-            throw WebPConverterError.pictureInitFailed
-        }
-
-        picture.width = Int32(width)
-        picture.height = Int32(height)
-        picture.use_argb = 1
-
-        let stride = width * 4
-        rgbaData.withUnsafeBytes { rawBuffer in
+        var output: UnsafeMutablePointer<UInt8>?
+        let outputSize = rgbaData.withUnsafeBytes { rawBuffer -> Int in
             let ptr = rawBuffer.bindMemory(to: UInt8.self)
-            WebPPictureImportRGBA(&picture, ptr.baseAddress!, Int32(stride))
+            return Int(WebPEncodeRGBA(
+                ptr.baseAddress!,
+                Int32(width),
+                Int32(height),
+                Int32(width * 4),
+                quality,
+                &output
+            ))
         }
 
-        defer { WebPPictureFree(&picture) }
-
-        var writer = WebPMemoryWriter()
-        WebPMemoryWriterInit(&writer)
-        picture.writer = { data, size, pic } -> Int32 in
-            guard let pic = pic, let data = data else { return 0 }
-            let w = pic.assumingMemoryBound(to: WebPMemoryWriter.self)
-            WebPMemoryWrite(w, data, size)
-            return 1
-        }
-        picture.custom_ptr = withUnsafeMutablePointer(to: &writer) { UnsafeMutableRawPointer($0) }
-
-        guard WebPEncode(&config, &picture) != 0 else {
-            WebPMemoryWriterClear(&writer)
+        guard outputSize > 0, let outputPtr = output else {
             throw WebPConverterError.encodeFailed
         }
 
-        let resultData = Data(bytes: writer.mem, count: writer.size)
-        WebPMemoryWriterClear(&writer)
+        let resultData = Data(bytes: outputPtr, count: outputSize)
+        WebPFree(outputPtr)
         return resultData
     }
 
@@ -213,21 +181,27 @@ extension CGImage {
         let width = self.width
         let height = self.height
         let bytesPerRow = width * 4
+        let totalBytes = height * bytesPerRow
 
-        var pixelData = Data(count: height * bytesPerRow)
+        var pixelData = Data(count: totalBytes)
 
-        guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else { return nil }
-        guard let context = CGContext(
-            data: &pixelData,
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bytesPerRow: bytesPerRow,
-            space: colorSpace,
-            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
-        ) else { return nil }
+        let success = pixelData.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) -> Bool in
+            guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
+                  let context = CGContext(
+                    data: ptr.baseAddress,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: bytesPerRow,
+                    space: colorSpace,
+                    bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+                  )
+            else { return false }
 
-        context.draw(self, in: CGRect(x: 0, y: 0, width: width, height: height))
-        return pixelData
+            context.draw(self, in: CGRect(x: 0, y: 0, width: width, height: height))
+            return true
+        }
+
+        return success ? pixelData : nil
     }
 }

@@ -19,11 +19,11 @@ enum BackgroundRemovalError: LocalizedError {
     }
 }
 
-protocol BackgroundRemovalServiceProtocol: AnyObject {
+protocol BackgroundRemovalServiceProtocol: AnyObject, Sendable {
     func removeBackground(from image: UIImage) async throws -> UIImage
 }
 
-final class BackgroundRemovalService: BackgroundRemovalServiceProtocol {
+final class BackgroundRemovalService: @unchecked Sendable, BackgroundRemovalServiceProtocol {
 
     func removeBackground(from image: UIImage) async throws -> UIImage {
         guard let cgImage = image.cgImage else {

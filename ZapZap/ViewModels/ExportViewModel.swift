@@ -16,11 +16,11 @@ final class ExportViewModel {
     var state: ExportState = .idle
     var shareItem: ShareItem?
 
-    private let exporter: WhatsAppExporterProtocol
+    private let exporter: any WhatsAppExporterProtocol
 
     init(
         pack: StickerPack,
-        exporter: WhatsAppExporterProtocol = WhatsAppExporter()
+        exporter: any WhatsAppExporterProtocol = WhatsAppExporter()
     ) {
         self.pack = pack
         self.exporter = exporter
@@ -44,7 +44,19 @@ final class ExportViewModel {
         state = .exporting
 
         do {
-            let url = try await exporter.export(pack: pack)
+            // Extract pack data within MainActor context before crossing isolation boundary
+            let packData = PackExportData(
+                identifier: pack.identifier,
+                name: pack.name,
+                stickers: pack.stickers.map { sticker in
+                    StickerExportData(
+                        imageData: sticker.imageData,
+                        isAnimated: sticker.isAnimated
+                    )
+                },
+                trayImageData: pack.trayImageData
+            )
+            let url = try await exporter.export(packData: packData)
             state = .ready(exportURL: url)
             shareItem = ShareItem(url: url)
         } catch {

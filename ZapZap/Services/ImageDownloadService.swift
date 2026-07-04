@@ -21,11 +21,11 @@ enum ImageDownloadError: LocalizedError {
     }
 }
 
-protocol ImageDownloadServiceProtocol: AnyObject {
+protocol ImageDownloadServiceProtocol: AnyObject, Sendable {
     func download(from url: URL) async throws -> UIImage
 }
 
-final class ImageDownloadService: ImageDownloadServiceProtocol {
+final class ImageDownloadService: @unchecked Sendable, ImageDownloadServiceProtocol {
 
     private let session: URLSession
     private let imageTypes: Set<String> = [

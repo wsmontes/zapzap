@@ -32,6 +32,7 @@ final class StorageService: StorageServiceProtocol {
         freeSpaceMB >= minimumMB
     }
 
+    @MainActor
     func showStorageAlert() -> UIAlertController {
         let alert = UIAlertController(
             title: "Armazenamento Cheio",
