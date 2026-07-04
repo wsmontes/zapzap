@@ -1,0 +1,71 @@
+/* Home */
+"Nenhuma figurinha ainda!" = "Nenhuma figurinha ainda!";
+"Toque no + para começar a criar\nsuas figurinhas para o WhatsApp" = "Toque no + para começar a criar\nsuas figurinhas para o WhatsApp";
+"Criar Figurinha" = "Criar Figurinha";
+"Criar nova figurinha" = "Criar nova figurinha";
+"ZapZap" = "ZapZap";
+"Cancelar" = "Cancelar";
+"Fechar" = "Fechar";
+"OK" = "OK";
+
+/* Source Picker */
+"De onde vem a figurinha?" = "De onde vem a figurinha?";
+"Foto" = "Foto";
+"Tire uma foto ou escolha da galeria" = "Tire uma foto ou escolha da galeria";
+"Internet" = "Internet";
+"Cole um link ou imagem da área de transferência" = "Cole um link ou imagem da área de transferência";
+"Meme" = "Meme";
+"Adicione texto estilo meme à sua imagem" = "Adicione texto estilo meme à sua imagem";
+"Cole o link da imagem aqui..." = "Cole o link da imagem aqui...";
+"Baixar Imagem" = "Baixar Imagem";
+"Nova Figurinha" = "Nova Figurinha";
+"Imagem da Internet" = "Imagem da Internet";
+"Ou cole uma imagem da área de transferência" = "Ou cole uma imagem da área de transferência";
+
+/* Editor */
+"Remover Fundo" = "Remover Fundo";
+"Fundo Removido" = "Fundo Removido";
+"Desfazer" = "Desfazer";
+"Salvar Figurinha" = "Salvar Figurinha";
+"Editor" = "Editor";
+"Apagando..." = "Apagando...";
+"Emoji" = "Emoji";
+"Selecionados:" = "Selecionados:";
+"Emojis" = "Emojis";
+
+/* Meme Editor */
+"Texto superior (bordão)..." = "Texto superior (bordão)...";
+"Texto inferior (punchline)..." = "Texto inferior (punchline)...";
+"Tamanho:" = "Tamanho:";
+"Salvar Meme" = "Salvar Meme";
+"Editor de Meme" = "Editor de Meme";
+
+/* Pack Detail */
+"Adicionar Figurinha" = "Adicionar Figurinha";
+"Exportar para WhatsApp" = "Exportar para WhatsApp";
+"Remover" = "Remover";
+
+/* Export */
+"Pronto para exportar!" = "Pronto para exportar!";
+"Criando arquivo..." = "Criando arquivo...";
+"Arquivo criado!" = "Arquivo criado!";
+"Compartilhar" = "Compartilhar";
+"Abrir WhatsApp" = "Abrir WhatsApp";
+"Exportar" = "Exportar";
+"Nenhuma figurinha no pack." = "Nenhuma figurinha no pack.";
+"Faltam %d figurinhas. Mínimo: 3." = "Faltam %d figurinhas. Mínimo: 3.";
+
+/* Services Errors */
+"Não encontrei nada pra recortar 😕" = "Não encontrei nada pra recortar 😕";
+"Falha ao processar a imagem. Tente novamente." = "Falha ao processar a imagem. Tente novamente.";
+"Não foi possível gerar o resultado." = "Não foi possível gerar o resultado.";
+"Imagem inválida para conversão." = "Imagem inválida para conversão.";
+"Falha ao extrair pixels da imagem." = "Falha ao extrair pixels da imagem.";
+"Falha ao codificar para WebP." = "Falha ao codificar para WebP.";
+"Link inválido. Cole uma URL de imagem válida." = "Link inválido. Cole uma URL de imagem válida.";
+"O link não é uma imagem. Tente um link .png, .jpg ou .gif." = "O link não é uma imagem. Tente um link .png, .jpg ou .gif.";
+"Falha ao baixar imagem." = "Falha ao baixar imagem.";
+"Resposta inválida do servidor." = "Resposta inválida do servidor.";
+"WhatsApp não está instalado." = "WhatsApp não está instalado.";
+"Falha ao criar arquivo .wastickers." = "Falha ao criar arquivo .wastickers.";
+"Falha ao criar manifesto do pack." = "Falha ao criar manifesto do pack.";
