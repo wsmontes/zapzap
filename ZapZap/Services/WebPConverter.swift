@@ -141,6 +141,47 @@ final class WebPConverter: WebPConverterProtocol {
     }
 }
 
+// MARK: - GIF Frame Extraction
+
+extension WebPConverter {
+    func extractFrames(from gifData: Data) throws -> (frames: [UIImage], delays: [Int]) {
+        guard let source = CGImageSourceCreateWithData(gifData as CFData, nil) else {
+            throw WebPConverterError.invalidImage
+        }
+
+        let count = CGImageSourceGetCount(source)
+        var frames: [UIImage] = []
+        var delays: [Int] = []
+
+        for i in 0..<count {
+            guard let cgImage = CGImageSourceCreateImageAtIndex(source, i, nil) else { continue }
+            frames.append(UIImage(cgImage: cgImage))
+            let delay = gifDelay(from: source, at: i)
+            delays.append(delay)
+        }
+
+        guard !frames.isEmpty else {
+            throw WebPConverterError.invalidImage
+        }
+
+        return (frames, delays)
+    }
+
+    private func gifDelay(from source: CGImageSource, at index: Int) -> Int {
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
+                as? [String: Any],
+              let gifProps = properties[kCGImagePropertyGIFDictionary as String]
+                as? [String: Any] else {
+            return 100
+        }
+
+        let unclampedDelay = (gifProps[kCGImagePropertyGIFUnclampedDelayTime as String] as? Double) ?? 0
+        let delay = (gifProps[kCGImagePropertyGIFDelayTime as String] as? Double) ?? 0
+        let seconds = max(unclampedDelay, delay)
+        return Int(seconds * 1000)
+    }
+}
+
 enum WebPConverterError: LocalizedError {
     case invalidImage
     case pixelExtractionFailed
