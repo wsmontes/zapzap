@@ -460,6 +460,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZapZapTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -468,6 +470,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.ZapZapTests;
 				SDKROOT = iphoneos;
+				SWIFT_TESTING_ENABLED = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZapZap.app/ZapZap";
 			};
@@ -620,6 +623,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZapZapTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -628,6 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zapzap.ZapZapTests;
 				SDKROOT = iphoneos;
+				SWIFT_TESTING_ENABLED = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZapZap.app/ZapZap";
 			};

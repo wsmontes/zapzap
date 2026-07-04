@@ -49,6 +49,9 @@ targets:
     settings:
       base:
         INFOPLIST_FILE: ZapZapTests/Info.plist
+        GENERATE_INFOPLIST_FILE: YES
+        ENABLE_TESTING_SEARCH_PATHS: YES
+        SWIFT_TESTING_ENABLED: YES
       configs:
         Debug:
           BUNDLE_LOADER: $(TEST_HOST)

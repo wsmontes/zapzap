@@ -10,6 +10,12 @@
     <string>O ZapZap usa a câmera para você fotografar e criar figurinhas.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>O ZapZap acessa suas fotos para criar figurinhas personalizadas.</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleDevelopmentRegion</key>
     <string>pt-BR</string>
     <key>CFBundleDisplayName</key>
